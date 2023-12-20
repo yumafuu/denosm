@@ -5,6 +5,8 @@ import { hideCursor, eraseScreen, render, resetScreen } from "../tty/index.js";
 import { GetSSMParameters, ListSSMParameters } from "../ssm/index.js";
 
 export const FuzzyFindAction = async ({ profile, query }) => {
+  profile = profile || Deno.env.get("AWS_PROFILE");
+
   let list;
   const pbList = $.progress("Loading");
   await pbList.with(async () => {
