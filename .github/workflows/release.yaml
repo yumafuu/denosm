@@ -46,11 +46,17 @@ jobs:
       - { uses: actions/download-artifact@v3, with: { name: x86_64-apple-darwin,       path: release/ } }
       - { uses: actions/download-artifact@v3, with: { name: aarch64-apple-darwin,      path: release/ } }
 
+      # - name: Release
+      #   run: |
+      #     export VERSION=$(echo "$GITHUB_REF" | sed -e 's!refs/tags/!!')
+      #     curl -L "https://github.com/tcnksm/ghr/releases/download/${GHR_VERSION}/ghr_${GHR_VERSION}_linux_amd64.tar.gz" | tar xvz
+      #     "ghr_${GHR_VERSION}_linux_amd64/ghr" -u YumaFuu -r sm-deno -replace -n "$VERSION" "$VERSION" release/
+      #   env:
+      #     GHR_VERSION: v0.16.2
+      #     GITHUB_TOKEN: ${{ github.token }}
+
       - name: Release
-        run: |
-          export VERSION=$(echo "$GITHUB_REF" | sed -e 's!refs/tags/!!')
-          curl -L "https://github.com/tcnksm/ghr/releases/download/${GHR_VERSION}/ghr_${GHR_VERSION}_linux_amd64.tar.gz" | tar xvz
-          "ghr_${GHR_VERSION}_linux_amd64/ghr" -u YumaFuu -r sm-deno -replace -n "$VERSION" "$VERSION" release/
+        uses: fnkr/github-action-ghr@v1
         env:
-          GHR_VERSION: v0.16.2
+          GHR_PATH: release/
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
