@@ -4,6 +4,8 @@
 
 ## Usage
 
+[![Image from Gyazo](https://i.gyazo.com/16ab4dc7073c573b73187a9ab0158972.gif)](https://gyazo.com/16ab4dc7073c573b73187a9ab0158972)
+
 ```bash
 $ sm # fuzzy find
 $ sm list
@@ -15,7 +17,6 @@ $ sm list -p your-aws-profile # You can set AWS_PROFILE
 ```bash
 $ deno install -A https://deno.land/x/smdeno@v1.0.2/index.js -n sm -f
 ```
-
 
 ## Requirements
 
