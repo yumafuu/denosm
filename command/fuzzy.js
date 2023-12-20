@@ -1,33 +1,12 @@
 import $ from "dax";
 import { keypress } from "cliffy/keypress/mod.ts";
 import { Fzf } from "https://esm.sh/fzf";
-import { eraseScreen, render } from "../tty/index.js";
+import { hideCursor, eraseScreen, render, resetScreen } from "../tty/index.js";
 import { GetSSMParameters, ListSSMParameters } from "../ssm/index.js";
-
-export const GetAction = async ({ profile, name }) => {
-  const parameter = await GetSSMParameters(profile, name);
-  const value = parameter.Value;
-
-  console.log(value);
-
-  return value;
-};
-
-export const ListAction = async ({ profile, query }) => {
-  const list = await ListSSMParameters(profile);
-  const parameters = list
-    .Parameters
-    .map((p) => p.Name)
-    .filter((p) => query ? p.includes(query) : true)
-    .join("\n");
-
-  console.log(parameters);
-  return parameters;
-};
 
 export const FuzzyFindAction = async ({ profile, query }) => {
   let list;
-  const pbList = $.progress("Loading parameters");
+  const pbList = $.progress("Loading");
   await pbList.with(async () => {
     list = await ListSSMParameters(profile);
   });
@@ -37,11 +16,20 @@ export const FuzzyFindAction = async ({ profile, query }) => {
     .map((p) => p.Name)
     .filter((p) => query ? p.includes(query) : true);
 
+  if (options.length === 1) {
+    const name = options[0];
+    const value = (await GetSSMParameters(profile, name)).Value;
+    printResult(value);
+
+    return
+  }
+
   let search = "";
   const fzf = new Fzf(options);
   let currentIndex = 0;
   let hits = fzf.find(search);
 
+  hideCursor();
   render(hits, search, currentIndex);
 
   for await (const event of keypress()) {
@@ -96,16 +84,19 @@ export const FuzzyFindAction = async ({ profile, query }) => {
     return;
   }
   const name = selected.item
-  eraseScreen();
-  console.log(name);
 
+  resetScreen();
   let parameter;
-  const pbGet = $.progress("Getting ther value");
+  const pbGet = $.progress(`${name}`);
   await pbGet.with(async () => {
     parameter = await GetSSMParameters(profile, name);
   });
   const value = parameter.Value;
 
-  console.log(value);
+  printResult(value);
   return value;
 };
+
+const printResult = (value) => {
+  console.log(value);
+}

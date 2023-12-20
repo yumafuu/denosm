@@ -1,18 +1,20 @@
 import { Command } from "cliffy";
-import { FuzzyFindAction, GetAction, ListAction } from "./command/index.js";
+import { ListAction } from "./command/list.js";
+import { GetAction } from "./command/get.js";
+import { FuzzyFindAction } from "./command/fuzzy.js";
 
 const VERSION = "1.0.0";
 const DESCRIPTION = "AWS SSM Parameter Store CLI with deno";
 
 await new Command()
-  .name("ssmhmm")
+  .name("sm")
   .version(VERSION)
   .description(DESCRIPTION)
   .globalOption("-p, --profile <profile:string>", "AWS profile name")
+  .option("-q, --query <filter:string>", "Filter query")
   .default("fuzzy")
   // list
   .command("list", "List parameters")
-  .option("-q, --query <filter:string>", "Filter query")
   .action(ListAction)
   // get
   .command("get", "Get parameter")
@@ -20,6 +22,5 @@ await new Command()
   .action(GetAction)
   // fuzzy find
   .command("fuzzy", "Fuzzy find parameter")
-  .option("-q, --query <query:string>", "Filter query")
   .action(FuzzyFindAction)
   .parse(Deno.args);
