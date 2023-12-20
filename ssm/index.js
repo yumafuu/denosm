@@ -1,4 +1,4 @@
-import $ from "dax";
+import $ from "https://deno.land/x/dax/mod.ts";
 
 export const ListSSMParameters = async (profile) => {
   const list = await $`aws ssm describe-parameters --profile ${profile}`.json();

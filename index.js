@@ -1,4 +1,4 @@
-import { Command } from "cliffy";
+import { Command } from "https://deno.land/x/cliffy@v1.0.0-rc.3/command/mod.ts";
 import { ListAction } from "./command/list.js";
 import { GetAction } from "./command/get.js";
 import { FuzzyFindAction } from "./command/fuzzy.js";

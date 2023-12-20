@@ -1,5 +1,5 @@
-import $ from "dax";
-import { keypress } from "cliffy/keypress/mod.ts";
+import $ from "https://deno.land/x/dax/mod.ts";
+import { keypress } from "https://deno.land/x/cliffy@v1.0.0-rc.3/keypress/mod.ts";
 import { Fzf } from "https://esm.sh/fzf";
 import { hideCursor, eraseScreen, render, resetScreen } from "../tty/index.js";
 import { GetSSMParameters, ListSSMParameters } from "../ssm/index.js";
