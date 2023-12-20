@@ -13,7 +13,7 @@ $ sm list -p your-aws-profile # You can set AWS_PROFILE
 
 ## Install
 ```bash
-$ deno install -A https://deno.land/x/smdeno@v1.0.1/index.js -n sm -f
+$ deno install -A https://deno.land/x/smdeno@v1.0.2/index.js -n sm -f
 ```
 
 
