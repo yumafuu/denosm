@@ -9,7 +9,13 @@
 ```bash
 $ sm # fuzzy find
 $ sm list
+/some-app/ahhhhh
+/some-app/some-key
+/some-app/supersecretkey
+
 $ sm get -n "/path/to/ssm"
+some-value
+
 $ sm list -p your-aws-profile # You can set AWS_PROFILE
 ```
 
