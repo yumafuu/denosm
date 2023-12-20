@@ -2,7 +2,7 @@
 
 🦖 Fuzzy Finder for [ AWS SSM Parameter Store ](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html)
 
-using [fzf-for-js](https://github.com/ajitid/fzf-for-js?tab=readme-ov-file) whici uses [fzf](https://github.com/junegunn/fzf)'s algorithm
+using [fzf-for-js](https://github.com/ajitid/fzf-for-js?tab=readme-ov-file) which uses [fzf](https://github.com/junegunn/fzf)'s algorithm
 
 ## Usage
 
