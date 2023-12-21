@@ -3,7 +3,7 @@ import { ListAction } from "./command/list.js";
 import { GetAction } from "./command/get.js";
 import { FuzzyFindAction } from "./command/fuzzy.js";
 
-const VERSION = "0.1.2";
+const VERSION = "0.2.0";
 const DESCRIPTION = "AWS SSM Parameter Store CLI with deno";
 
 await new Command()
@@ -18,7 +18,7 @@ await new Command()
   .action(ListAction)
   // get
   .command("get", "Get parameter")
-  .option("-n, --name <name:string>", "Parameter name", { required: true })
+  .arguments("<name>")
   .action(GetAction)
   // fuzzy find
   .command("fuzzy", "Fuzzy find parameter")

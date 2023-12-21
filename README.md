@@ -11,8 +11,6 @@ which uses [fzf](https://github.com/junegunn/fzf)'s algorithm
 ![usage](https://github.com/YumaFuu/denosm/assets/32477095/03f42c87-0307-4476-81c1-c27484ed29bf)
 
 
-
-
 ```bash
 $ sm # fuzzy find
 $ sm list # list all parameters
