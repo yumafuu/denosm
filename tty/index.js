@@ -1,8 +1,11 @@
-import { tty } from "https://deno.land/x/cliffy@v1.0.0-rc.3/ansi/tty.ts";
+import {
+  colors,
+  tty,
+} from "https://deno.land/x/cliffy@v1.0.0-rc.3/ansi/mod.ts";
 
 export const hideCursor = () => {
   tty.cursorHide();
-}
+};
 
 export const eraseScreen = () => {
   tty
@@ -12,17 +15,28 @@ export const eraseScreen = () => {
 
 export const resetScreen = () => {
   tty
-    .cursorShow()
+    .cursorShow();
 };
 
 export const render = (list, query, index) => {
   eraseScreen();
 
   console.log(`? ${query}`);
-  let result = ""
+  let result = "";
   for (let i = 0; i < list.length; i++) {
-    const item = list[i];
-    const line = `${i === index ? ">" : " "} ${item.item}`;
+    const value = list[i].item;
+    let highlighted = "";
+
+    for (let i = 0; i < value.length; i++) {
+      const s = value[i];
+      if (query.includes(s)) {
+        highlighted += colors.bold.blue(s);
+      } else {
+        highlighted += s;
+      }
+    }
+
+    const line = `${i === index ? ">" : " "} ${highlighted}`;
     result += line + "\n";
   }
 

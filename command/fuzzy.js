@@ -1,7 +1,7 @@
 import $ from "https://deno.land/x/dax/mod.ts";
 import { keypress } from "https://deno.land/x/cliffy@v1.0.0-rc.3/keypress/mod.ts";
 import { Fzf } from "https://esm.sh/fzf";
-import { hideCursor, eraseScreen, render, resetScreen } from "../tty/index.js";
+import { hideCursor, render, resetScreen } from "../tty/index.js";
 import { GetSSMParameters, ListSSMParameters } from "../ssm/index.js";
 
 export const FuzzyFindAction = async ({ profile, query }) => {
@@ -23,7 +23,7 @@ export const FuzzyFindAction = async ({ profile, query }) => {
     const value = (await GetSSMParameters(profile, name)).Value;
     printResult(value);
 
-    return
+    return;
   }
 
   let search = "";
@@ -80,12 +80,12 @@ export const FuzzyFindAction = async ({ profile, query }) => {
     render(hits, search, currentIndex);
   }
 
-  const selected = hits[currentIndex]
+  const selected = hits[currentIndex];
   if (!selected) {
     console.log("No parameter selected");
     return;
   }
-  const name = selected.item
+  const name = selected.item;
 
   resetScreen();
   let parameter;
@@ -101,4 +101,4 @@ export const FuzzyFindAction = async ({ profile, query }) => {
 
 const printResult = (value) => {
   console.log(value);
-}
+};

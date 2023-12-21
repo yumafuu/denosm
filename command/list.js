@@ -13,4 +13,3 @@ export const ListAction = async ({ profile, query }) => {
   console.log(parameters);
   return parameters;
 };
-

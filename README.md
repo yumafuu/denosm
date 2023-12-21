@@ -1,8 +1,10 @@
 # 🦖 denosm
 
-Fuzzy Finder for [ AWS SSM Parameter Store ](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html)
+Fuzzy Finder for
+[AWS SSM Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html)
 
-using [fzf-for-js](https://github.com/ajitid/fzf-for-js?tab=readme-ov-file) which uses [fzf](https://github.com/junegunn/fzf)'s algorithm
+using [fzf-for-js](https://github.com/ajitid/fzf-for-js?tab=readme-ov-file)
+which uses [fzf](https://github.com/junegunn/fzf)'s algorithm
 
 ## Usage
 
@@ -22,6 +24,7 @@ $ sm list -p your-aws-profile # You can set AWS_PROFILE
 ```
 
 ## Install
+
 ```bash
 # Deno
 $ deno install -A https://deno.land/x/denosm@v0.1.0/index.js -n sm -f
