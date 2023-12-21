@@ -56,13 +56,19 @@ export const FuzzyFindAction = async ({ profile, query }) => {
     if (event.key === "backspace") search = search.slice(0, -1);
     if (!event.ctrlKey && event.key.length === 1) search += event.key;
 
-    if (event.key === "up" || (event.ctrlKey && event.key === "k")) {
-      console.log("up");
+    if (
+      event.key === "up" ||
+      (event.ctrlKey && event.key === "k") ||
+      (event.ctrlKey && event.key === "p")
+    ) {
       currentIndex -= 1;
       currentIndex = currentIndex < 0 ? 0 : currentIndex;
     }
-    if (event.key === "down" || (event.key === "enter")) {
-      console.log("down");
+    if (
+      event.key === "down" ||
+      (event.key === "enter") ||
+      (event.ctrlKey && event.key === "n")
+    ) {
       currentIndex += 1;
       currentIndex = currentIndex > hits.length - 1
         ? hits.length - 1
