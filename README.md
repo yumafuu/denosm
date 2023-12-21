@@ -27,7 +27,7 @@ $ sm list -p your-aws-profile # You can set AWS_PROFILE
 
 ```bash
 # Deno
-$ deno install -A https://deno.land/x/denosm@v0.1.0/index.js -n sm -f
+$ deno install -A https://deno.land/x/denosm/index.js -n sm -f
 
 # Homebrew
 $ brew install YumaFuu/tap/sm
