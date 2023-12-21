@@ -8,8 +8,9 @@ which uses [fzf](https://github.com/junegunn/fzf)'s algorithm
 
 ## Usage
 
+![render1703128886381](https://github.com/YumaFuu/denosm/assets/32477095/4b0a25a6-8050-42c1-81f9-08a0b9efcaac)
 
-![t-rec_1](https://github.com/YumaFuu/denosm/assets/32477095/824ad4da-ec10-4b38-b72e-a36948ab6ec8)
+
 
 ```bash
 $ sm # fuzzy find
