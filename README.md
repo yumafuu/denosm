@@ -8,19 +8,20 @@ which uses [fzf](https://github.com/junegunn/fzf)'s algorithm
 
 ## Usage
 
-![render1703128886381](https://github.com/YumaFuu/denosm/assets/32477095/4b0a25a6-8050-42c1-81f9-08a0b9efcaac)
+![usage](https://github.com/YumaFuu/denosm/assets/32477095/03f42c87-0307-4476-81c1-c27484ed29bf)
+
 
 
 
 ```bash
 $ sm # fuzzy find
-$ sm list
-/some-app/ahhhhh
-/some-app/some-key
-/some-app/supersecretkey
+$ sm list # list all parameters
+/path/to/secret_key
+/path/to/username
+/path/to/supersecretkey
 
-$ sm get -n "/path/to/ssm"
-some-value
+$ sm get "/path/to/username" # get value by name
+its-me
 
 $ sm list -p your-aws-profile # set AWS_PROFILE
 ```
