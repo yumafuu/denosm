@@ -8,7 +8,8 @@ which uses [fzf](https://github.com/junegunn/fzf)'s algorithm
 
 ## Usage
 
-[![Image from Gyazo](https://i.gyazo.com/16ab4dc7073c573b73187a9ab0158972.gif)](https://gyazo.com/16ab4dc7073c573b73187a9ab0158972)
+
+![t-rec_1](https://github.com/YumaFuu/denosm/assets/32477095/824ad4da-ec10-4b38-b72e-a36948ab6ec8)
 
 ```bash
 $ sm # fuzzy find
@@ -20,7 +21,7 @@ $ sm list
 $ sm get -n "/path/to/ssm"
 some-value
 
-$ sm list -p your-aws-profile # You can set AWS_PROFILE
+$ sm list -p your-aws-profile # set AWS_PROFILE
 ```
 
 ## Install
