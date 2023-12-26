@@ -7,6 +7,11 @@ import { GetSSMParameters, ListSSMParameters } from "../ssm/index.js";
 export const FuzzyFindAction = async ({ profile, query }) => {
   profile = profile || Deno.env.get("AWS_PROFILE");
 
+  if (!profile) {
+    console.log("No profile specified");
+    return;
+  }
+
   let list;
   const pbList = $.progress("Loading");
   await pbList.with(async () => {

@@ -3,6 +3,11 @@ import { GetSSMParameters } from "../ssm/index.js";
 export const GetAction = async ({ profile }, name) => {
   profile = profile || Deno.env.get("AWS_PROFILE");
 
+  if (!profile) {
+    console.log("No profile specified");
+    return;
+  }
+
   const parameter = await GetSSMParameters(profile, name);
   const value = parameter?.Value;
 
