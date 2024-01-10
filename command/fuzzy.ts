@@ -1,21 +1,24 @@
 import $ from "https://deno.land/x/dax/mod.ts";
 import { keypress } from "https://deno.land/x/cliffy@v1.0.0-rc.3/keypress/mod.ts";
 import { Fzf } from "https://esm.sh/fzf";
-import { hideCursor, render, resetScreen } from "../tty/index.js";
-import { GetSSMParameters, ListSSMParameters } from "../ssm/index.js";
+import { hideCursor, render, resetScreen } from "../tty/index.ts";
+import { GetSSMParameters, ListSSMParameters } from "../ssm/index.ts";
 
-export const FuzzyFindAction = async ({ profile, query }) => {
+import { List } from "../ssm/index.ts";
+
+export const FuzzyFindAction = async (
+  { profile, query }: { profile?: string; query: string },
+) => {
   profile = profile || Deno.env.get("AWS_PROFILE");
 
-  if (!profile) {
+  if (profile === undefined) {
     console.log("No profile specified");
     return;
   }
 
-  let list;
   const pbList = $.progress("Loading");
-  await pbList.with(async () => {
-    list = await ListSSMParameters(profile);
+  const list: List = await pbList.with(async () => {
+    return await ListSSMParameters(String(profile));
   });
 
   const options = list
@@ -59,7 +62,7 @@ export const FuzzyFindAction = async ({ profile, query }) => {
     if (event.ctrlKey && event.key === "w") search = "";
 
     if (event.key === "backspace") search = search.slice(0, -1);
-    if (!event.ctrlKey && event.key.length === 1) search += event.key;
+    if (!event.ctrlKey && event.key?.length === 1) search += event.key;
 
     if (
       event.key === "up" ||
@@ -99,10 +102,9 @@ export const FuzzyFindAction = async ({ profile, query }) => {
   const name = selected.item;
 
   resetScreen();
-  let parameter;
   const pbGet = $.progress(`${name}`);
-  await pbGet.with(async () => {
-    parameter = await GetSSMParameters(profile, name);
+  const parameter = await pbGet.with(async () => {
+    return await GetSSMParameters(String(profile), name);
   });
   const value = parameter.Value;
 
@@ -110,6 +112,6 @@ export const FuzzyFindAction = async ({ profile, query }) => {
   return value;
 };
 
-const printResult = (value) => {
+const printResult = (value: string) => {
   console.log(value);
 };

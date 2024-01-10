@@ -1,6 +1,9 @@
-import { GetSSMParameters } from "../ssm/index.js";
+import { GetSSMParameters } from "../ssm/index.ts";
 
-export const GetAction = async ({ profile }, name) => {
+export const GetAction = async (
+  { profile }: { profile?: string },
+  name: string,
+) => {
   profile = profile || Deno.env.get("AWS_PROFILE");
 
   if (!profile) {

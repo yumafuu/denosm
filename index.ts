@@ -1,7 +1,7 @@
 import { Command } from "https://deno.land/x/cliffy@v1.0.0-rc.3/command/mod.ts";
-import { ListAction } from "./command/list.js";
-import { GetAction } from "./command/get.js";
-import { FuzzyFindAction } from "./command/fuzzy.js";
+import { ListAction } from "./command/list.ts";
+import { GetAction } from "./command/get.ts";
+import { FuzzyFindAction } from "./command/fuzzy.ts";
 
 const VERSION = "0.2.0";
 const DESCRIPTION = "AWS SSM Parameter Store CLI with deno";
@@ -24,3 +24,8 @@ await new Command()
   .command("fuzzy", "Fuzzy find parameter")
   .action(FuzzyFindAction)
   .parse(Deno.args);
+
+// // put
+// .command("put", "Put parameter")
+// .action(PutAction)
+// .parse(Deno.args);

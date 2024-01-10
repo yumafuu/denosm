@@ -1,6 +1,8 @@
-import { ListSSMParameters } from "../ssm/index.js";
+import { ListSSMParameters } from "../ssm/index.ts";
 
-export const ListAction = async ({ profile, query }) => {
+export const ListAction = async (
+  { profile, query }: { profile?: string; query?: string },
+) => {
   profile = profile || Deno.env.get("AWS_PROFILE");
 
   if (!profile) {

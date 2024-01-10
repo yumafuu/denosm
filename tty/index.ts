@@ -18,7 +18,11 @@ export const resetScreen = () => {
     .cursorShow();
 };
 
-export const render = (list, query, index) => {
+export const render = (
+  list: { item: string }[],
+  query: string,
+  index: number,
+) => {
   eraseScreen();
 
   console.log(`? ${query}`);
