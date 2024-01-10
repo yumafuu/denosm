@@ -15,12 +15,12 @@ await new Command()
   .description(DESCRIPTION)
   // global options
   .globalOption("-p, --profile <profile:string>", "AWS profile name")
-  .option("-q, --query <filter:string>", "Filter query")
   // default
   .default("fuzzy")
   // list
   .command("list", "List parameters")
   .action(ListAction)
+  .option("-q, --query <filter:string>", "Filter query")
   // get
   .command("get", "Get parameter")
   .arguments("<name>")

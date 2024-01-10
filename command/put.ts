@@ -21,7 +21,7 @@ export const PutAction = async ({
   name?: string;
   value?: string;
   type?: string;
-  override: boolean;
+  override?: boolean;
 }) => {
   profile = profile || Deno.env.get("AWS_PROFILE");
 
@@ -73,7 +73,7 @@ export const PutAction = async ({
     }
   }
 
-  if (!override) {
+  if (override === undefined) {
     const hasParameter = !!(await GetSSMParameters(profile, name));
     if (hasParameter) {
       const isOverride = await Select.prompt({
@@ -108,7 +108,7 @@ export const PutAction = async ({
     name,
     value,
     type as ValueType,
-    override,
+    override!,
   );
 
   console.log(JSON.stringify(parameter));
