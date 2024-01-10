@@ -1,5 +1,7 @@
 # 🦖 denosm
 
+![Release](https://github.com/YumaFuu/denosm/actions/workflows/release.yaml/badge.svg)
+
 Fuzzy Finder for
 [AWS SSM Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html)
 
