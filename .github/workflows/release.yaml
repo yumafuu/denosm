@@ -25,7 +25,7 @@ jobs:
 
       - name: Compile
         run: |
-          deno compile -A --output ${{ matrix.target }} --target ${{ matrix.target }} index.js
+          deno compile -A --output ${{ matrix.target }} --target ${{ matrix.target }} index.ts
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
