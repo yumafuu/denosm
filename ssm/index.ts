@@ -44,8 +44,10 @@ export const PutSSMParameters = async (
   type: "String" | "StringList" | "SecureString",
   overwrite: boolean,
 ): Promise<Parameter> => {
-
-  const parameter = await $`aws ssm put-parameter --name ${name} --value ${value} --type ${type} ${overwrite ? "--overwrite" : ""} --profile ${profile}`.json()
+  const parameter =
+    await $`aws ssm put-parameter --name ${name} --value ${value} --type ${type} ${
+      overwrite ? "--overwrite" : ""
+    } --profile ${profile}`.json();
 
   return parameter;
-}
+};

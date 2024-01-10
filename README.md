@@ -11,23 +11,33 @@ which uses [fzf](https://github.com/junegunn/fzf)'s algorithm
 ![usage](https://github.com/YumaFuu/denosm/assets/32477095/03f42c87-0307-4476-81c1-c27484ed29bf)
 
 ```bash
-$ sm # fuzzy find
-$ sm list # list all parameters
+# fuzzy find
+$ sm
+
+# list all parameters
+$ sm list
 /path/to/secret_key
 /path/to/username
 /path/to/supersecretkey
 
-$ sm get "/path/to/username" # get value by name
+# get value by name
+$ sm get "/path/to/username"
 its-me
 
-$ sm list -p your-aws-profile # set AWS_PROFILE
+# set AWS_PROFILE
+$ sm list -p your-aws-profile
+
+# Create or Update value
+$ sm put
+# or
+$ sm put -n name -v value -t String
 ```
 
 ## Install
 
 ```bash
 # Deno
-$ deno install -A https://deno.land/x/denosm/index.js -n sm -f
+$ deno install -A https://deno.land/x/denosm/index.ts -n sm -f
 
 # Homebrew
 $ brew install YumaFuu/tap/sm

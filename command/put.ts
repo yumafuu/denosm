@@ -1,4 +1,9 @@
-import { GetSSMParameters, ListSSMParameters, PutSSMParameters, ValueType } from "../ssm/index.ts";
+import {
+  GetSSMParameters,
+  ListSSMParameters,
+  PutSSMParameters,
+  ValueType,
+} from "../ssm/index.ts";
 import { Input } from "https://deno.land/x/cliffy@v1.0.0-rc.3/prompt/mod.ts";
 import { Select } from "https://deno.land/x/cliffy@v1.0.0-rc.3/prompt/select.ts";
 import { Confirm } from "https://deno.land/x/cliffy@v1.0.0-rc.3/prompt/confirm.ts";
@@ -6,18 +11,18 @@ import { Table } from "https://deno.land/x/cliffy@v1.0.0-rc.3/table/mod.ts";
 import { colors } from "https://deno.land/x/cliffy@v1.0.0-rc.3/ansi/colors.ts";
 
 export const PutAction = async ({
-    profile,
-    name,
-    value,
-    type,
-    override,
-  }: {
-    profile?: string;
-    name?: string;
-    value?: string;
-    type?: string;
-    override: boolean;
-  }) => {
+  profile,
+  name,
+  value,
+  type,
+  override,
+}: {
+  profile?: string;
+  name?: string;
+  value?: string;
+  type?: string;
+  override: boolean;
+}) => {
   profile = profile || Deno.env.get("AWS_PROFILE");
 
   if (!profile) {
@@ -27,7 +32,7 @@ export const PutAction = async ({
 
   const suggestions = (await ListSSMParameters(profile))
     .Parameters
-    .map((p) => p.Name)
+    .map((p) => p.Name);
 
   if (!name) {
     name = await Input.prompt({
@@ -54,25 +59,27 @@ export const PutAction = async ({
     type = await Select.prompt({
       message: "type?",
       options: ["String", "StringList", "SecureString"],
-    })
+    });
     if (!type) {
       console.log("No type specified");
       return;
     }
 
     if (!["String", "StringList", "SecureString"].includes(type)) {
-      console.log("Invalid type specified, must be one of String, StringList, SecureString");
+      console.log(
+        "Invalid type specified, must be one of String, StringList, SecureString",
+      );
       return;
     }
   }
 
   if (!override) {
-    const hasParameter = !!(await GetSSMParameters(profile, name))
+    const hasParameter = !!(await GetSSMParameters(profile, name));
     if (hasParameter) {
       const isOverride = await Select.prompt({
         message: "override?",
         options: ["yes", "no"],
-      })
+      });
       override = isOverride === "yes";
       if (!override) {
         console.log("Not overriding");
@@ -89,7 +96,7 @@ export const PutAction = async ({
     ["override", info(override ? "yes" : "no")],
   );
 
-console.log(table.toString());
+  console.log(table.toString());
   const confirmed: boolean = await Confirm.prompt("Can you confirm?");
   if (!confirmed) {
     console.log("Aborted");
