@@ -46,6 +46,4 @@ $ brew install YumaFuu/tap/sm
 ```
 
 ## Requirements
-
-- [Deno](https://deno.com)
 - [aws-cli](https://aws.amazon.com/cli/)
