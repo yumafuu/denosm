@@ -7,7 +7,7 @@ import { GetSSMParameters, ListSSMParameters } from "../ssm/index.ts";
 import { List } from "../ssm/index.ts";
 
 export const FuzzyFindAction = async (
-  { profile, query }: { profile?: string; query: string },
+  { profile, query }: { profile?: string; query?: string },
 ) => {
   profile = profile || Deno.env.get("AWS_PROFILE");
 
@@ -18,7 +18,7 @@ export const FuzzyFindAction = async (
 
   const pbList = $.progress("Loading");
   const list: List = await pbList.with(async () => {
-    return await ListSSMParameters(String(profile));
+    return await ListSSMParameters(profile!);
   });
 
   const options = list
@@ -104,7 +104,7 @@ export const FuzzyFindAction = async (
   resetScreen();
   const pbGet = $.progress(`${name}`);
   const parameter = await pbGet.with(async () => {
-    return await GetSSMParameters(String(profile), name);
+    return await GetSSMParameters(profile!, name);
   });
   const value = parameter.Value;
 

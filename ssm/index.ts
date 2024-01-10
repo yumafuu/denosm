@@ -15,6 +15,9 @@ export type List = {
   Parameters: Parameter[];
 };
 
+const types = ["String", "StringList", "SecureString"] as const;
+export type ValueType = typeof types[number];
+
 export const ListSSMParameters = async (profile: string): Promise<List> => {
   const list = await $`aws ssm describe-parameters --profile ${profile}`.json();
 
@@ -33,3 +36,16 @@ export const GetSSMParameters = async (
 
   return param;
 };
+
+export const PutSSMParameters = async (
+  profile: string,
+  name: string,
+  value: string,
+  type: "String" | "StringList" | "SecureString",
+  overwrite: boolean,
+): Promise<Parameter> => {
+
+  const parameter = await $`aws ssm put-parameter --name ${name} --value ${value} --type ${type} ${overwrite ? "--overwrite" : ""} --profile ${profile}`.json()
+
+  return parameter;
+}
