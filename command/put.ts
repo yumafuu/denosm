@@ -10,6 +10,8 @@ import { Confirm } from "https://deno.land/x/cliffy@v1.0.0-rc.3/prompt/confirm.t
 import { Table } from "https://deno.land/x/cliffy@v1.0.0-rc.3/table/mod.ts";
 import { colors } from "https://deno.land/x/cliffy@v1.0.0-rc.3/ansi/colors.ts";
 
+import { dirname } from "https://deno.land/std@0.130.0/path/mod.ts";
+
 export const PutAction = async ({
   profile,
   name,
@@ -30,10 +32,12 @@ export const PutAction = async ({
     return;
   }
 
-  const suggestions = (await ListSSMParameters(profile))
+  const dirnames = (await ListSSMParameters(profile))
     .Parameters
-    .map((p) => p.Name);
+    .map((p) => `${dirname(p.Name)}/`)
+    .filter((p) => p !== "./")
 
+  const suggestions = [...new Set(dirnames)];
   if (!name) {
     name = await Input.prompt({
       message: "name?",
